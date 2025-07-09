@@ -25,14 +25,11 @@ def setup_driver(headless=False):
 
 
 def clean_text(html_content):
-    """清理HTML内容，提取纯文本并过滤广告"""
+    # 过滤广告
     soup = BeautifulSoup(html_content, "html.parser")
-
-    # 移除所有脚本、样式和广告标签
     for tag in soup(["script", "style", "ins", "noscript"]):
         tag.decompose()
 
-    # 移除所有链接（通常包含广告）
     for a in soup.find_all("a"):
         a.decompose()
 
